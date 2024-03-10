@@ -1,18 +1,16 @@
-# Сценарий игры
-    label splashscreen:
-        $ renpy.movie_cutscene("films/cutscene.ogv")
-        return
+# Вы можете расположить сценарий своей игры в этом файле.
+label splashscreen:
+    $ renpy.movie_cutscene("films/cutscene.ogv")
+    return
 
-# Игра начинается здесь:
-    label start:
-        
-        $ username = renpy.input("Введите ваше имя: ", default = "Саша")
+# Игра начинается здесь:s
+label start:
     
-        play music "music/startmusic.mp3" fadein 0.5 fadeout 2.0
-    
-        scene schoolpark
+    $ username = renpy.input("Введите ваше имя: ", default = "Саша")
 
-# Start of the story
+    play music "music/startmusic.mp3" fadein 0.5 fadeout 2.0
+
+    scene schoolpark
 
     "Три часа дня. Закончились уроки, и я как обычно направлялся домой."
     "Это такой же обычный день как и всегда..."
@@ -65,8 +63,7 @@
             show melissa
             
             melissa "Я решила. Я пойду с тобой!"
-
-#The way to home
+            "Блестяще! Она так решила... {w} Ну, лучшее её не растраивать"
 
     scene black_bg with fade 
     play sound "soundeffects/steps_ground.mp3" fadeout 2.0 volume 0.8
@@ -196,9 +193,5 @@
 # есть варик вставить сюда полностью сгенерированную фотку как мелисса уходит помахав нам рукой, и это будет первая фотка в галерее игры
 #scene melissa_waves_scene with fade
     "Мелисса помахав рукой быстрым шагом ушла в сторону остановки. {w} Наверное ей нужно проехаться на трамвае, прежде чем она будет дома."
-
-#Main character's house
-
-
 
     return
