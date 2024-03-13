@@ -1,3 +1,4 @@
+
 # Сценарий игры
 label splashscreen:
     $ renpy.movie_cutscene("films/cutscene.ogv")
@@ -70,7 +71,7 @@ label start:
     scene black_bg with fade 
     play sound "soundeffects/steps_ground.mp3" fadeout 2.0 volume 0.8
     play audio "soundeffects/birds.mp3" loop
-    play music "music/just_relax.mp3" fadein 1.0
+    play music "music/just_relax.mp3" fadein 1.0 
     scene schoolpark with fade 
     pause 1.5           
     scene sp_side with fade
@@ -100,7 +101,7 @@ label start:
     show melissa_sad
 
     melissa "Почему ты соврал мне?"
-    "Вот и приплыли."
+    "Ну вот и приплыли."
     user "Ну... {w} Мне..."
     user "Мне просто не нравится проводить время в компании. {w} Не люблю я эту всю суету."
     user "Вот и сегодня хотелось бы побыть одному."
@@ -190,7 +191,6 @@ label start:
 
     melissa "Мама? {w} Ах да, точно! {w} Ты прав! Я и ей помогаю, конечно!"
     "Что это бы..{nw}"
-    # ТУТ БУДЕТ ПРИКОЛЬНО ДОБАВИТЬ АВТОПЕРЕКЛЮЧЕНИЯ ТЕКСТА НА СЛЕДУЮЩИЙ, ТИПА ОНА СБИЛА НАС С МЫСЛЕЙ
 
     scene mc_house with fade
 
@@ -214,18 +214,30 @@ label start:
         "Лучше уж так, чем потом слушать её недовольство на счёт меня завтра и всю неделю вперёд."
         "Нужно же уметь такой приставучей быть!"
 
-    "Но даже так, лучше ответить не задевая её"
+    "Но даже так, лучше ответить не задевая её."
     user "Правду говоря, я тоже так не думал."
     user "Ладно, я тогда пойду наверное... {w} Уже темнеет."
 
     hide melissa_shy
     show melissa_r
 
-    melissa "Да, ты прав! {w} Тогда и я побежала!"
-    melissa "Спасибо тебе за прогулку! {w} Очень надеюсь что мы ещё не раз пройдемся домой вместе разговаривая о всяком!!"
+    melissa "Да, ты прав! {w} Тогда я тоже пойду!"
+    melissa "Спасибо тебе за прогулку! {w} Очень надеюсь, что мы ещё свидимся."
 
     scene melissa_waves_scene with fade
 
     "Мелисса помахав рукой быстрым шагом ушла в сторону остановки. {w} Наверное ей нужно проехаться на трамвае, прежде чем она будет дома."
 
+    scene black_bg with fade
+    pause 4
+    stop music fadeout 2.0
+    jump act1
+    return
+
+    
+label act1:
+    $ renpy.movie_cutscene("films/act1.webm")
+    scene mc_house_hall with fade
+    #user_nvl "TEXT"
+    #melissa_nvl "TEXT"
     return
