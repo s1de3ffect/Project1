@@ -235,9 +235,17 @@ label start:
     return
 
     
-label act1:
+    label act1:
+
     $ renpy.movie_cutscene("films/act1.webm")
     scene mc_house_hall with fade
+
+    user  "Фух, наконец я дома. Сегодняшняя \"прогулка\" затянулась на дольше чем должна была."
+    user "Тут всегда всё тихо. Могу предположить что мама на кухне готовит ужин, а отец как обычно, будет на работе до позна."
+    user "Пспешу ка я к себе в комнату, пока не начали задавать лишние вопросы. Честно говоря, я уже устал каждый день отвечать на одно и то же."
+
+    scene mc_house_bedroom
+
     #user_nvl "TEXT"
     #melissa_nvl "TEXT"
     return
