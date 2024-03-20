@@ -7,7 +7,7 @@ label splashscreen:
 # Игра начинается здесь:
 label start:
     
-    $ username = renpy.input("Введите ваше имя: ", default = "Саша")
+    $ username = renpy.input("Введите ваше имя: ", default = "Сосик")
 
     play music "music/startmusic.mp3" fadein 0.5 fadeout 2.0
 
@@ -237,7 +237,7 @@ label start:
     
 label act1:
     $ renpy.movie_cutscene("films/act1.webm")
-    play music "music/moonlight.mp3" fadein 2 volume 0.7
+    play music "soundeffects/sverchki.mp3" fadein 2 volume 0.7
     scene mc_house_hall with fade
     "Фух, наконец я дома. Сегодняшняя \"прогулка\" затянулась на дольше чем должна была."
     "Не припомню чтобы я в последнее время с кем-то ходил вместе домой.{w} Всё бывает впервые, не буду брать в голову."
@@ -254,7 +254,7 @@ label act1:
     "Меня же всегда устраивала моя жизнь."
     "Да котись оно всё к чёрту, аж голова разболелась."
     "Я пошёл спать."
-
+    $ _skipping = False
     pause 2
     scene bedroom_night with dissolve
     pause 5
@@ -264,6 +264,7 @@ label act1:
     pause 1
     play sound "soundeffects/message_sound.wav"
     pause 1.5
+    $ _skipping = True
     "Кому пришла мысль писать мне в такое время?"
     "Придётся пойти посмотреть что там. {w} Вдруг это отец."
     unknown_nvl "Приветик!{nw}"
@@ -273,11 +274,11 @@ label act1:
         "Ответить неизвестному":
             $ RespondMessage = True
             user_nvl "Ты кто??"
-            unknown_nvl "Я тот кто похищает души по ночам..."
+            unknown_nvl "{b}Я тот кто похищает души по ночам...{/b}"
             user_nvl "Хочу предупредить, что я не верю во всю эту чушь."
             user_nvl "Если это какой-то спам, то я уже готов заблокировать этот номер."
             unknown_nvl "СТОЙ!"
-            unknown_nvl "Сейчайс я изменю аватар и имя!"
+            unknown_nvl "Просто добавь мой номер в контакты!"
             user_nvl "??"
             melissa_nvl "Это же я! Мелисса :)"
             user_nvl "Мелисса? А ты не думаешь что уже довольно поздно?"
@@ -286,15 +287,16 @@ label act1:
             user_nvl "Проверила?"
             melissa_nvl "Да!"
             user_nvl "Отлично. Теперь я спать."
-            "[username] offline"
+            nvl_narrator "[username] offline"
             melissa_nvl "Спокойной ночки!"
             melissa_nvl "Увидимся в школе ;)"
-            "Мелисса offline"
+            nvl_narrator "Мелисса offline"
         "Не отвечать":
             $ RespondMessage = False
             user "Я очень сильно устал, чувствую как мои веки тяжелеют."
             user "Лучше лягу спать не отвечая, а то сегодняшний день и так был слижком утомительным."
     
+    stop music fadeout 2
     scene black_bg with dissolve
     pause 1
 
@@ -307,17 +309,19 @@ label act1:
     scene bedroom_morning with dissolve
     #Где-то в этом отрезке сюжета можно пробовать добавлять анимацию открытия/закрытия глаз
     
-    play sound birds #пташки короче поют
+    play sound "soundeffects/birds.mp3" loop
+
     "..."
     "Пятница{w} — последний день школы перед выходными."
     "Наконец можно будет вдосталь отдохнуть, перед тем как вновь проводить скучные дни в классе."
     "Я одел свою привычную школьную форму и позавтракав омлетом, который я считаю своим фирменным блюдом, вышел в школу."
     
-    #play sound steps
+    play audio "soundeffects/steps_ground.mp3"
     scene black_bg with dissolve
     pause 1
     scene road_to_house with fade #в этом случае дорога к школе
     pause 2.5
+    stop audio
     scene schoolpark with fade
     pause 1.5
     scene schoolmain with fade
@@ -339,16 +343,17 @@ label act1:
         hide melissa
         show melissa_shy
 
-        melissa "Надеюсь я не сильно помешала тебе и ты сомог уснуть."
+        melissa "Надеюсь я не сильно помешала тебе и ты смог уснуть."
 
-         hide melissa_shy
+        hide melissa_shy
         show melissa_smile
 
         melissa "Но знаешь, я очень рада что ты мне ответил. {w} Наверное я всё же тебе не безразлична."
-        "Что же мне ей ответить... Bcмысле, что она мне не безразлична!? На что она намекает?"
-
-        #play sound school_ring
-
+        "Что же мне ей ответить... Bcмысле она мне не безразлична!? На что она намекает?"
+        user "Ну..."
+        user "Я просто {nw}"
+        play audio "soundeffects/school_ring.wav"
+        
         "Фух, звонок спас меня. Хоть где-то он полезен."
 
         hide melissa_smile
@@ -366,23 +371,38 @@ label act1:
         user "Ты же вроде не спрашивала его у меня."
         
         hide melissa_shy
-        show melissa_nervous
+        show melissa_worry
 
         melissa "Ахх да...{w} Номер...{w} Ну я его это...{w} В журнале классном увидела, ну и решила посмотреть твой ли это номер."
         user "Вот оно что. Ну ладно." 
 
-        #play sound school_ring
-        hide melissa_nervous
+        play audio "soundeffects/school_ring.wav"
+        hide melissa_worry
 
 
     show melissa
 
     melissa "Ой!{w} Я думаю нам нужно бежать, а то учителям может не понравиться, что мы прийдём так поздно."
     "Это правда.{w} Хоть и учителя в нашей школе очень хорошие и отзывчивые, но если опаздывать, то можно получить по шее."
+    hide melissa 
 
     scene school_hall with fade
+    show melissa with dissolve
 
-    "Нужно же...{w} Я об этом только сейчайс подумал."
+    user "Если нас отчитают - пиняй на себя. Это же не я тебя задержал прямо перед входом в школу."
+
+    hide melissa
+    show melissa_worry
+
+    if (RespondMessage):
+        melissa "Ну извини меня. Я просто хотела узнать как ты отреагировал на то, что я тебе написала..."
+    else:
+        melissa "Ну извини меня. Но я должна была сказать тебе, что это была я."
+    user "Та всё, проехали."
+    "Нужно же...{w} Я об этом только сейчас подумал."
     "Мне кажется будет очень странно если я зайду в класс вместе с Мелиссой."
-
+    hide melissa_worry
+    show melissa
+    melissa "Пойдём быстрее."
+    
     return
